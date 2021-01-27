@@ -1,0 +1,13 @@
+---
+- hosts: all
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Retrive VRFs
+      ios_command:
+        commands: show run | section vrf
+      register: output
+
+    - name: Print VRF output
+      debug: var=output
+

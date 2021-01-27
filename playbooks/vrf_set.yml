@@ -1,0 +1,14 @@
+---
+- hosts: all
+  connection: local
+  gather_facts: no
+  tasks:
+    
+    - name: Configure VRF
+      ios_vrf:
+        name: "{{ vrf_name }}"
+        rd: 65001:{{ vrf_id }}
+        route_import:
+          - 65001:{{ vrf_id }}
+        route_export:
+          - 65001:{{ vrf_id }}

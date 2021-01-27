@@ -1,0 +1,22 @@
+stages:
+  - .pre
+  - test_ansible
+  - test_app
+  - pylint
+
+setup:
+  stage: .pre
+  script: pipenv install && pipenv clean
+
+test_ansible:
+  stage: test_ansible
+  script: pipenv run /bin/bash tests/test_ansible.sh
+
+test_app:
+  stage: test_app
+  script: pipenv run /bin/bash tests/test_app.sh
+
+check_code:
+  stage: pylint
+  script: pipenv run pylint app.py
+
